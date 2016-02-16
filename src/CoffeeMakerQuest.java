@@ -9,7 +9,11 @@ public class CoffeeMakerQuest
 	public CoffeeMakerQuest()
 	{
 		this.currentRoom = new Room("a circular room", "an elegant armchair", new Items(true, false, false));
-		this.currentRoom.addNorthRoom(new Room("a blue room", "dogs everywhere", new Items(false, true, true)));
+		this.currentRoom.addNorthRoom(new Room("a green room", "a large TV", new Items(false, false, false)));
+		this.currentRoom.addNorthRoom(new Room("a furry room", "a groovy beanbag", new Items(false, false, false)));
+		this.currentRoom.addNorthRoom(new Room("a throne room", "a royal table", new Items(false, false, false)));
+		this.currentRoom.addNorthRoom(new Room("an active room", "a tall bed", new Items(false, true, false)));
+		this.currentRoom.addNorthRoom(new Room("a pool room", "a wet countertop", new Items(false, false, true)));
 		this.inventory = new Items(false, false, false);
 		this.running = false;
 	}
