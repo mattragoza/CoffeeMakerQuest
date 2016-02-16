@@ -162,25 +162,20 @@ public class CoffeeMakerQuest
 		return command;
 	}
 	
-	public void run()
-	{
-		System.out.println("CoffeeMakerQuest 2.0");
-		System.out.println("Enter N, S, L, I, D, or H");
-		Scanner input = new Scanner(System.in);	
-		this.setRunning(true);
-		while (this.isRunning())
-		{
-			System.out.println("______________________________");
-			this.describeRoom();
-			Character command = CoffeeMakerQuest.getCommand(input);
-			this.executeCommand(command);
-		}
-		input.close();
-	}
-
 	public static void main(String[] args)
 	{
 		CoffeeMakerQuest quest = new CoffeeMakerQuest();
-		quest.run();
+		System.out.println("CoffeeMakerQuest 2.0");
+		System.out.println("Enter N, S, L, I, D, or H");
+		Scanner input = new Scanner(System.in);	
+		quest.setRunning(true);
+		while (quest.isRunning())
+		{
+			System.out.println("______________________________");
+			quest.describeRoom();
+			Character command = CoffeeMakerQuest.getCommand(input);
+			quest.executeCommand(command);
+		}
+		input.close();
 	}
 }

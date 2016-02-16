@@ -1,8 +1,10 @@
 import static org.junit.Assert.*;
-
+import static org.mockito.Mockito.*;
 import java.util.Scanner;
 
+
 import org.junit.Test;
+import org.mockito.Mockito;
 
 public class CoffeeMakerQuestTest
 {
@@ -89,7 +91,11 @@ public class CoffeeMakerQuestTest
 	public void testCMQLookAroundNoItems()
 	{
 		CoffeeMakerQuest CMQ = new CoffeeMakerQuest();
-		CMQ.getCurrentRoom().getRoomItems().clear();
+		Items noItems = Mockito.mock(Items.class);
+		when(noItems.hasCoffee()).thenReturn(false);
+		when(noItems.hasCream()).thenReturn(false);
+		when(noItems.hasSugar()).thenReturn(false);
+		CMQ.getCurrentRoom().setRoomItems(noItems);
 		CMQ.lookAround();
 		assertTrue(CMQ.getInventory().isEmpty());
 	}
@@ -102,7 +108,11 @@ public class CoffeeMakerQuestTest
 	public void testCMQLookAroundAcquireItem()
 	{
 		CoffeeMakerQuest CMQ = new CoffeeMakerQuest();
-		CMQ.getCurrentRoom().setRoomItems(new Items(false, true, false));
+		Items oneItem = Mockito.mock(Items.class);
+		when(oneItem.hasCoffee()).thenReturn(false);
+		when(oneItem.hasCream()).thenReturn(true);
+		when(oneItem.hasSugar()).thenReturn(false);
+		CMQ.getCurrentRoom().setRoomItems(oneItem);
 		CMQ.lookAround();
 		assertFalse(CMQ.getInventory().isEmpty());
 	}
@@ -116,7 +126,11 @@ public class CoffeeMakerQuestTest
 	{
 		CoffeeMakerQuest CMQ = new CoffeeMakerQuest();
 		CMQ.setRunning(true);
-		CMQ.getCurrentRoom().setRoomItems(new Items(true, true, true));
+		Items allItems = Mockito.mock(Items.class);
+		when(allItems.hasCoffee()).thenReturn(true);
+		when(allItems.hasCream()).thenReturn(true);
+		when(allItems.hasSugar()).thenReturn(true);
+		CMQ.getCurrentRoom().setRoomItems(allItems);
 		CMQ.lookAround();
 		CMQ.drinkCoffee();
 		assertFalse(CMQ.isRunning());
@@ -134,6 +148,9 @@ public class CoffeeMakerQuestTest
 		assertFalse(CMQ.isRunning());
 	}
 	
+	// Executing 0 as a command should stop the program running.
+	// Make a CoffeeMakerQuest and set it as running.
+	// Execute the 0 command. It should no longer be running.
 	@Test
 	public void testCMQExecuteCommandZero()
 	{
@@ -142,13 +159,5 @@ public class CoffeeMakerQuestTest
 		Character zero = 0;
 		CMQ.executeCommand(zero);
 		assertFalse(CMQ.isRunning());
-	}
-	
-	@Test
-	public void testCMQGetCommand()
-	{
-		CoffeeMakerQuest CMQ = new CoffeeMakerQuest();
-		//Scanner input = Mockito.mock(Scanner.class);
-		//CMQ.getCommand(input);
 	}
 }

@@ -86,15 +86,23 @@ public class RoomTest
 		catch (IllegalArgumentException e) {}
 	}
 	
+	// Getting the room description should return the string that was passed
+	// as the Room's description to the constructor. Create a room with a
+	// room description string and call getRoomDesc(). The returned string
+	// should be the same as was passed to the constructor.
 	@Test
-	public void testRooGetRoomDesc()
+	public void testRoomGetRoomDesc()
 	{
 		Room room = new Room("room", "furn", new Items(false, false, false));
 		assertEquals(room.getRoomDesc(), "room");
 	}
 	
+	// Getting the room's furniture description should return the string that was passed
+	// as the Room's furniture description to the constructor. Create a room with a
+	// furniture description string and call getFurnDesc(). The returned string
+	// should be the same as was passed to the constructor.
 	@Test
-	public void testRooGetFurnDesc()
+	public void testRoomGetFurnDesc()
 	{
 		Room room = new Room("room", "furn", new Items(false, false, false));
 		assertEquals(room.getFurnDesc(), "furn");
